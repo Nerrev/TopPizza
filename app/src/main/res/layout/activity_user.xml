@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.UserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:layout_marginTop="73dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout"
+            android:text="Log Out"/>
+
+
+        <TextView
+            android:id="@+id/uname"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Username:" />
+
+        <TextView
+            android:id="@+id/uemail"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:text="Email:" />
+
+        <TextView
+            android:id="@+id/upassword"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:text="Password:" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
