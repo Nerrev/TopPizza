@@ -32,7 +32,7 @@ public class StartActivity extends AppCompatActivity {
                 ConnectionAsyncTask connectionAsyncTask= new ConnectionAsyncTask(StartActivity.this);
                 connectionAsyncTask.execute("http://www.mocky.io/v2/5b522fa32e000074005c1c40");
                 Intent i = new Intent(StartActivity.this, BeginActivity.class);
-                StartActivity.this.startActivity(i);
+                startActivity(i);
                 finish();
 
             }
