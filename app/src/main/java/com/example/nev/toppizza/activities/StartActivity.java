@@ -1,5 +1,6 @@
 package com.example.nev.toppizza.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,9 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ConnectionAsyncTask connectionAsyncTask= new ConnectionAsyncTask(StartActivity.this);
                 connectionAsyncTask.execute("http://www.mocky.io/v2/5b522fa32e000074005c1c40");
+                Intent i = new Intent(StartActivity.this, BeginActivity.class);
+                StartActivity.this.startActivity(i);
+                finish();
 
             }
         });
