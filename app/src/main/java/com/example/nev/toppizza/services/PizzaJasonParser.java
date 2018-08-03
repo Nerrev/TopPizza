@@ -24,10 +24,10 @@ public class PizzaJasonParser {
                 price[0]=jsonObject.getString("smallPrice");
                 price[1]=jsonObject.getString("medium");
                 price[2]=jsonObject.getString("largePrice");
-                boolean offer=false;
-                if(jsonObject.getString("offer").equals("yes"))
-                    offer=true;
-                Pizza Pizza = new Pizza(jsonObject.getString("name"),jsonObject.getString("summary"),jsonObject.getString("type"),price,offer);
+
+
+
+                Pizza Pizza = new Pizza(jsonObject.getString("name"),jsonObject.getString("summary"),jsonObject.getString("type"),price,jsonObject.getString("offer").toString());
                 Pizzas.add(Pizza);
             }
         } catch (JSONException e) {

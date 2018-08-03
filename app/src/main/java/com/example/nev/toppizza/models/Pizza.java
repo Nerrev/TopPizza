@@ -8,9 +8,9 @@ public class Pizza {
     private String summary;
     private String type;
     private String[] price= new String[3];
-    private boolean offer;
+    private String offer;
 
-    public Pizza(String name, String summary, String type, String[] price, boolean offer) {
+    public Pizza(String name, String summary, String type, String[] price, String offer) {
          setName( name);
         setSummary(summary);
         setType(type);
@@ -50,13 +50,14 @@ public class Pizza {
         this.price = price;
     }
 
-    public boolean isOffer() {
+    public String getOffer() {
         return offer;
     }
 
-    public void setOffer(boolean offer) {
+    public void setOffer(String offer) {
         this.offer = offer;
     }
+
 
     @Override
     public String toString() {
