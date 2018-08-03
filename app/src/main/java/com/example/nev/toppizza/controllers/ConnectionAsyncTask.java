@@ -3,6 +3,7 @@ package com.example.nev.toppizza.controllers;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Handler;
 
 
 import com.example.nev.toppizza.activities.StartActivity;
@@ -18,15 +19,13 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
     Activity activity;
     private ProgressDialog dialog;
     public ConnectionAsyncTask(Activity activity) {
-        dialog = new ProgressDialog(activity);
         this.activity = activity;
     }
 
     @Override
     protected void onPreExecute() {
-        dialog.setMessage("Loading Please Wait ...");
-        dialog.show();
-        ((StartActivity) activity).setButtonText("connecting");
+
+        ((StartActivity) activity).setButtonProg(50);
         super.onPreExecute();
     }
 
@@ -42,11 +41,22 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
 
         if(s!=null) {
-            ((StartActivity) activity).setButtonText("connected");
+            ((StartActivity) activity).setButtonProg(100);
             List<Pizza> pizza = PizzaJasonParser.getObjectFromJason(s);
              ((StartActivity) activity).loadPizza(pizza);
             ((StartActivity) activity).connected();
         }
-        dialog.dismiss();
+        else{
+            ((StartActivity) activity).setButtonProg(-1);
+            ((StartActivity) activity).connectionError();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ((StartActivity) activity).setButtonProg(0);
+
+                }
+            }, 2000);
+        }
+
     }
 }

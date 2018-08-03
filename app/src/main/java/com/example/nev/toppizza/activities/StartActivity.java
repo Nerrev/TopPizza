@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.controllers.ConnectionAsyncTask;
 import com.example.nev.toppizza.models.Pizza;
@@ -17,7 +19,7 @@ import java.util.List;
 
 
 public class StartActivity extends AppCompatActivity {
-    Button button;
+    CircularProgressButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,9 @@ public class StartActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start);
 
-        button = (Button)findViewById(R.id.startBtn);
+
+        button = (CircularProgressButton) findViewById(R.id.startBtn);
+        button.setIndeterminateProgressMode(true);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +51,14 @@ public class StartActivity extends AppCompatActivity {
             finish();
         }
     }
-    public void setButtonText(String text)
+    public void setButtonProg(int n)
     {
-        button.setText(text);
+        button.setProgress(n);
     }
+    public void connectionError(){
+        Toast.makeText(getApplicationContext(), "Connection Failed.",
+                Toast.LENGTH_LONG).show();
+    }
+
 
 }
