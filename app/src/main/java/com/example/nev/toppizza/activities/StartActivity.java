@@ -18,7 +18,6 @@ import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
     Button button;
-    LinearLayout ly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,6 @@ public class StartActivity extends AppCompatActivity {
                 connectionAsyncTask.execute("http://www.mocky.io/v2/5b522fa32e000074005c1c40");
             }
         });
-
-        ly= findViewById(R.id.layout1);
     }
 
     public void loadPizza(List<Pizza> pizza){
@@ -55,15 +52,4 @@ public class StartActivity extends AppCompatActivity {
         button.setText(text);
     }
 
-    public void printPizzas()
-    {
-        LinearLayout linearLayout  = (LinearLayout) findViewById(R.id.layout1);
-        linearLayout.removeAllViews();
-        SQLhelper dbh= new SQLhelper(StartActivity.this);
-
-            TextView textView = new TextView(this);
-            textView.setText(dbh.getPizzaById("1").getString(1).toString());
-            linearLayout.addView(textView);
-
-    }
 }
