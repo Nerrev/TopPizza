@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.StartActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.StartActivity"
+    android:background="@drawable/back_ground"
+    android:layout_gravity="bottom"
+    android:gravity="bottom">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/layout1">
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Started"
-         />
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/startBtn"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            app:cpb_cornerRadius="5dp"
+            app:cpb_iconComplete="@drawable/ic_action_accept"
+            app:cpb_iconError="@drawable/ic_action_cancel"
+            app:cpb_selectorComplete="@color/green"
+            app:cpb_selectorError="@color/red"
+            app:cpb_selectorIdle="@color/green"
+            app:cpb_textIdle="@string/get_started" />
+
+
+
+</LinearLayout>
