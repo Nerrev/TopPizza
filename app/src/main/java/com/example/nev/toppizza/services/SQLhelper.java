@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.models.User;
 
@@ -65,18 +66,70 @@ public class SQLhelper extends SQLiteOpenHelper {
 
         return cursor;
     }
-    public Cursor getAll(){
+    public Cursor getAllUsers(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor=db.rawQuery("select * from USER",null);
 
         return cursor;
     }
 
-    public void DeleteById(String id){
-        SQLiteDatabase db = getWritableDatabase();
-        //db.rawQuery("DELETE * from CUSTOMER where ID="+id,null);
-        db.delete("USER", "ID" + "=" + id, null);
+    public boolean insertFavorite(int user, int pizza){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID",user);
+        contentValues.put("PID",pizza);
+
+
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.insertOrThrow("FAVORITES", null,contentValues);
+            return true;
+        }catch (SQLiteException e){
+            e.printStackTrace();
+
+            return false;
+        }
     }
+
+    public Cursor getUserFavorites(int user){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor=db.rawQuery("select * from PIZZA, FAVORITES WHERE PIZZA.PID=FAVORITES.PID and FAVORITES.ID="+user,null);
+
+        return cursor;
+
+    }
+
+
+    public boolean insertOrder(Order order){
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID",order.getUser());
+        contentValues.put("PID",order.getPizza());
+        contentValues.put("PAYMENT",order.getPayment());
+        contentValues.put("ORDERDATE",order.getDate().toString());
+
+
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.insertOrThrow("ORDERS", null,contentValues);
+            return true;
+        }catch (SQLiteException e){
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+
+    public Cursor getUserOrders(int user){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor=db.rawQuery("select * from PIZZA as P , ORDERS as O WHERE P.PID=O.PID and O.ID="+user,null);
+
+        return cursor;
+
+    }
+
+
     public Cursor getPizzaById(int id){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor=db.rawQuery("select * from PIZZA where PID="+id,null);
