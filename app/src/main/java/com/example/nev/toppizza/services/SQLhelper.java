@@ -77,7 +77,7 @@ public class SQLhelper extends SQLiteOpenHelper {
         //db.rawQuery("DELETE * from CUSTOMER where ID="+id,null);
         db.delete("USER", "ID" + "=" + id, null);
     }
-    public Cursor getPizzaById(String id){
+    public Cursor getPizzaById(int id){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor=db.rawQuery("select * from PIZZA where PID="+id,null);
 
@@ -104,8 +104,8 @@ public class SQLhelper extends SQLiteOpenHelper {
             contentValues.put("LPRICE",pizza.get(i).getPrice()[2]);
             contentValues.put("offer",pizza.get(i).getOffer());
 
-            if(getPizzaById(""+(i+1)).moveToFirst())
-                db.update("PIZZA", contentValues, "PID='" + (i+1)+"'", null);
+            if(getPizzaById(i+1).moveToFirst())
+                db.update("PIZZA", contentValues, "PID=" + (i+1), null);
             else
                 db.insert("PIZZA",null,contentValues);
 

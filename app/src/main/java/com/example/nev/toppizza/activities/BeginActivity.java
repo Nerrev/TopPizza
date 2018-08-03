@@ -1,12 +1,16 @@
 package com.example.nev.toppizza.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.services.SQLhelper;
 
 
 public class BeginActivity extends AppCompatActivity {
@@ -36,7 +40,6 @@ public class BeginActivity extends AppCompatActivity {
                 BeginActivity.this.startActivity(i);
             }
         });
-
 
     }
 }
