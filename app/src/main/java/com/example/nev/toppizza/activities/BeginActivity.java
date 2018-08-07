@@ -20,8 +20,8 @@ public class BeginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_begin);
 
 
-        Button sign = (Button) findViewById(R.id.mainsign);
         Button login = (Button) findViewById(R.id.mainlogin);
+        Button sign = (Button) findViewById(R.id.mainsign);
 
 
         sign.setOnClickListener(new View.OnClickListener() {
