@@ -149,7 +149,7 @@ public class SignupActivity extends AppCompatActivity {
                 sign.setProgress(0);
             }
         };
-        h.postDelayed(r, 1000);
+        h.postDelayed(r, 1500);
 
     }
 
