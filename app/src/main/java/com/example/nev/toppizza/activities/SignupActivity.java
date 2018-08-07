@@ -1,14 +1,15 @@
 package com.example.nev.toppizza.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.models.User;
 import com.example.nev.toppizza.services.Functions;
@@ -16,6 +17,7 @@ import com.example.nev.toppizza.services.SQLhelper;
 
 
 public class SignupActivity extends AppCompatActivity {
+    CircularProgressButton sign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +25,12 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
 
-        Button sign = (Button) findViewById(R.id.sign);
+        sign = (CircularProgressButton) findViewById(R.id.sign);
+        sign.setIndeterminateProgressMode(true);
+        Spinner gender = (Spinner) findViewById(R.id.gender);
+        String[] options = {"Gender", "Male", "Female"};
+        ArrayAdapter objGenderArr = new ArrayAdapter<String>(this, R.layout.spinner_item, options);
 
-        AppCompatSpinner gender = (AppCompatSpinner) findViewById(R.id.gender);
-        String[] options = {"Male", "Female"};
-        ArrayAdapter objGenderArr = new ArrayAdapter(this, android.R.layout.simple_spinner_item, options);
         gender.setAdapter(objGenderArr);
 
 
@@ -39,12 +42,13 @@ public class SignupActivity extends AppCompatActivity {
                 try {
 
                     EditText firstName = (EditText) findViewById(R.id.firstName);
+
                     EditText lastName = (EditText) findViewById(R.id.lastName);
                     EditText email = (EditText) findViewById(R.id.email);
                     EditText phone = (EditText) findViewById(R.id.phone);
                     EditText pass = (EditText) findViewById(R.id.pass);
                     EditText conpass = (EditText) findViewById(R.id.conpass);
-                    AppCompatSpinner gender = (AppCompatSpinner) findViewById(R.id.gender);
+                    Spinner gender = (Spinner) findViewById(R.id.gender);
 
 
                     String fName = "NA";
@@ -54,37 +58,58 @@ public class SignupActivity extends AppCompatActivity {
                     String passt = "NA";
                     String conpasst = "NA";
                     String gendert = "NA";
-
+                    sign.setProgress(50);
                     fName = firstName.getText().toString();
                     lName = lastName.getText().toString();
                     emailt = email.getText().toString();
                     phonet = phone.getText().toString();
                     passt = pass.getText().toString();
                     conpasst = conpass.getText().toString();
+                    if (gender.getSelectedItemPosition() == 0) {
+                        sign.setProgress(-1);
+                        delay();
+                        Toast.makeText(getApplicationContext(), "Error: Fill All Fields.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     gendert = gender.getSelectedItem().toString();
 
                     User user = new User(emailt, Functions.encrypt(passt), fName, lName, phonet, gendert);
 
-                    if (!Functions.checkText(fName))
+                    if (!Functions.checkText(fName)) {
+                        sign.setProgress(-1);
+                        delay();
                         Toast.makeText(getApplicationContext(), "Error: invalid first name.",
                                 Toast.LENGTH_LONG).show();
-                    else if (!Functions.checkText(lName))
+                    } else if (!Functions.checkText(lName)) {
+                        sign.setProgress(-1);
+                        delay();
                         Toast.makeText(getApplicationContext(), "Error: invalid last name.",
                                 Toast.LENGTH_LONG).show();
-                    else if (!Functions.isValidEmailAddress(emailt))
+
+                    } else if (!Functions.isValidEmailAddress(emailt)) {
+                        sign.setProgress(-1);
+                        delay();
                         Toast.makeText(getApplicationContext(), "Error: invalid email.",
                                 Toast.LENGTH_LONG).show();
-                    else if (!Functions.checkNumber(phonet))
+
+                    } else if (!Functions.checkNumber(phonet)) {
+                        sign.setProgress(-1);
+                        delay();
                         Toast.makeText(getApplicationContext(), "Error: invalid phone number.",
                                 Toast.LENGTH_LONG).show();
 
-                    else if (!Functions.checkPass(passt) || !Functions.checkPassword(passt))
-                        Toast.makeText(getApplicationContext(), "Error: invalid Password. (has to have numbers & chars and has to be at least 8 characters long) ",
+                    } else if (!Functions.checkPass(passt) || !Functions.checkPassword(passt)) {
+                        sign.setProgress(-1);
+                        delay();
+                        Toast.makeText(getApplicationContext(), "Error: invalid Password. (must have numbers & chars and has to be at least 8 characters long) ",
                                 Toast.LENGTH_LONG).show();
 
-                    else if (!passt.equals(conpasst)) { //validate
+                    } else if (!passt.equals(conpasst)) { //validate
                         Toast.makeText(getApplicationContext(), "Error: Passwords do not match!",
                                 Toast.LENGTH_LONG).show();
+                        sign.setProgress(-1);
+                        delay();
+
                     } else { //sign up
 
                         SQLhelper d = new SQLhelper(SignupActivity.this);
@@ -94,11 +119,18 @@ public class SignupActivity extends AppCompatActivity {
 
 
                         else {
+                            sign.setProgress(100);
                             Toast.makeText(getApplicationContext(), "Sign up Successful",
                                     Toast.LENGTH_LONG).show();
-                            finish();
+                            Handler h = new Handler();
+                            Runnable r = new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            };
+                            h.postDelayed(r, 1000);
                         }
-
                     }
 
                 } catch (Exception e) {
@@ -108,4 +140,17 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void delay() {
+        Handler h = new Handler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                sign.setProgress(0);
+            }
+        };
+        h.postDelayed(r, 1000);
+
+    }
+
 }

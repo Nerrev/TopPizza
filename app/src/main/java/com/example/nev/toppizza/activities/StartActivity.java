@@ -2,6 +2,7 @@ package com.example.nev.toppizza.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -46,9 +47,15 @@ public class StartActivity extends AppCompatActivity {
     public void connected(){
         SQLhelper dbh= new SQLhelper(StartActivity.this);
         if(dbh.getAllPizza().moveToFirst()) {
-            Intent i = new Intent(StartActivity.this, BeginActivity.class);
-            startActivity(i);
-            finish();
+            final Intent i = new Intent(StartActivity.this, LoginActivity.class);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(i);
+                    finish();
+                }
+            }, 1000);
         }
     }
     public void setButtonProg(int n)

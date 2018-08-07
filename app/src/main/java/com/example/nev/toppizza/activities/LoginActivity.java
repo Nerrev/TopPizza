@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,10 +19,23 @@ import com.example.nev.toppizza.services.SQLhelper;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Button sign = (Button) findViewById(R.id.signUp);
+
+        sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                LoginActivity.this.startActivity(i);
+
+            }
+        });
+
 
         Button login = (Button) findViewById(R.id.login);
         EditText email1 = (EditText) findViewById(R.id.loginEmail);
@@ -71,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
 
-                        AppCompatCheckBox rem = (AppCompatCheckBox) findViewById(R.id.remember);
+                        CheckBox rem = (CheckBox) findViewById(R.id.remember);
                         SharedPreferences sp = getSharedPreferences("Login Data", Context.MODE_PRIVATE);
                         SharedPreferences.Editor ed = sp.edit();
 
