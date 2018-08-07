@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
 
-                        AppCompatCheckBox rem = (AppCompatCheckBox) findViewById(R.id.remember);
+                        CheckBox rem = (CheckBox) findViewById(R.id.remember);
                         SharedPreferences sp = getSharedPreferences("Login Data", Context.MODE_PRIVATE);
                         SharedPreferences.Editor ed = sp.edit();
 
