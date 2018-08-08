@@ -12,10 +12,19 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "version"
+    productFlavors {
+        flavor1 {
+        }
+        flavor2 {
+            proguardFile 'flavor2-rules.pro'
+        }
+    }
+
 }
 
 dependencies {
