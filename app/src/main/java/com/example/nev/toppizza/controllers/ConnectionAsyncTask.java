@@ -5,11 +5,9 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Handler;
 
-
 import com.example.nev.toppizza.activities.StartActivity;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.PizzaJasonParser;
-import com.example.nev.toppizza.services.SQLhelper;
 
 import java.util.List;
 
@@ -18,6 +16,7 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
 
     Activity activity;
     private ProgressDialog dialog;
+
     public ConnectionAsyncTask(Activity activity) {
         this.activity = activity;
     }
@@ -40,13 +39,12 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        if(s!=null) {
+        if (s != null) {
             ((StartActivity) activity).setButtonProg(100);
             List<Pizza> pizza = PizzaJasonParser.getObjectFromJason(s);
-             ((StartActivity) activity).loadPizza(pizza);
+            ((StartActivity) activity).loadPizza(pizza);
             ((StartActivity) activity).connected();
-        }
-        else{
+        } else {
             ((StartActivity) activity).setButtonProg(-1);
             ((StartActivity) activity).connectionError();
             new Handler().postDelayed(new Runnable() {

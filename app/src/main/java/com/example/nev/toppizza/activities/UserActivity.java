@@ -23,19 +23,19 @@ public class UserActivity extends AppCompatActivity {
         TextView pass = (TextView) findViewById(R.id.upassword);
         TextView email = (TextView) findViewById(R.id.uemail);
 
-        name.setText("name: "+this.userin.getString(this.userin.getColumnIndex("FNAME")));
-        pass.setText("Password: "+this.userin.getString(this.userin.getColumnIndex("PASSWORD")));
-        email.setText("Email: "+this.userin.getString(this.userin.getColumnIndex("EMAIL")));
+        name.setText("name: " + this.userin.getString(this.userin.getColumnIndex("FNAME")));
+        pass.setText("Password: " + this.userin.getString(this.userin.getColumnIndex("PASSWORD")));
+        email.setText("Email: " + this.userin.getString(this.userin.getColumnIndex("EMAIL")));
 
 
-        Button logout= (Button) findViewById(R.id.logout);
+        Button logout = (Button) findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    userin= null;
+                userin = null;
 
-                Intent i = new Intent(UserActivity.this,BeginActivity.class);
+                Intent i = new Intent(UserActivity.this, BeginActivity.class);
                 UserActivity.this.startActivity(i);
                 finish();
 

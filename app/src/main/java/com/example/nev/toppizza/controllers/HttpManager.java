@@ -13,19 +13,19 @@ public class HttpManager {
         BufferedReader bufferedReader = null;
         try {
             URL url = new URL(URI);
-           HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
             String line = bufferedReader.readLine();
             while (line != null) {
-                stringBuilder.append(line +'\n');
+                stringBuilder.append(line + '\n');
                 line = bufferedReader.readLine();
             }
             return stringBuilder.toString();
 
         } catch (Exception ex) {
-            Log.d("HttpURLConnection",ex.toString());
+            Log.d("HttpURLConnection", ex.toString());
         }
         return null;
 

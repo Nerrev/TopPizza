@@ -11,9 +11,9 @@ public class Order {
 
     public Order(int user, int pizza, int payment, Date date) {
         setUser(user);
-        setPizza( pizza);
+        setPizza(pizza);
         setPayment(payment);
-        setDate( date);
+        setDate(date);
     }
 
     public int getUser() {

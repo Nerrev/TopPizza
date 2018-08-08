@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BeginActivity">
 
     <LinearLayout
+        android:id="@+id/test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/test">
+        android:orientation="vertical">
 
         <Button
+            android:id="@+id/mainlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/mainlogin"/>
+            android:text="Login" />
+
         <Button
+            android:id="@+id/mainsign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signup"
-            android:id="@+id/mainsign"/>
+            android:text="Signup" />
 
 
     </LinearLayout>

@@ -16,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/logout"
-            android:text="Log Out"/>
+            android:text="Log Out" />
 
 
         <TextView

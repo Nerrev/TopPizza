@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
@@ -34,19 +31,20 @@ public class StartActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectionAsyncTask connectionAsyncTask= new ConnectionAsyncTask(StartActivity.this);
+                ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(StartActivity.this);
                 connectionAsyncTask.execute("http://www.mocky.io/v2/5b522fa32e000074005c1c40");
             }
         });
     }
 
-    public void loadPizza(List<Pizza> pizza){
-        SQLhelper dbh= new SQLhelper(StartActivity.this);
+    public void loadPizza(List<Pizza> pizza) {
+        SQLhelper dbh = new SQLhelper(StartActivity.this);
         dbh.updatePizzaTable(pizza);
     }
-    public void connected(){
-        SQLhelper dbh= new SQLhelper(StartActivity.this);
-        if(dbh.getAllPizza().moveToFirst()) {
+
+    public void connected() {
+        SQLhelper dbh = new SQLhelper(StartActivity.this);
+        if (dbh.getAllPizza().moveToFirst()) {
             final Intent i = new Intent(StartActivity.this, LoginActivity.class);
 
             new Handler().postDelayed(new Runnable() {
@@ -58,11 +56,12 @@ public class StartActivity extends AppCompatActivity {
             }, 1000);
         }
     }
-    public void setButtonProg(int n)
-    {
+
+    public void setButtonProg(int n) {
         button.setProgress(n);
     }
-    public void connectionError(){
+
+    public void connectionError() {
         Toast.makeText(getApplicationContext(), "Connection Failed.",
                 Toast.LENGTH_LONG).show();
     }

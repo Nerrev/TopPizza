@@ -20,14 +20,13 @@ public class PizzaJasonParser {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject;
                 jsonObject = (JSONObject) jsonArray.get(i);
-                String[] price=new String[3];
-                price[0]=jsonObject.getString("smallPrice");
-                price[1]=jsonObject.getString("medium");
-                price[2]=jsonObject.getString("largePrice");
+                String[] price = new String[3];
+                price[0] = jsonObject.getString("smallPrice");
+                price[1] = jsonObject.getString("medium");
+                price[2] = jsonObject.getString("largePrice");
 
 
-
-                Pizza Pizza = new Pizza(jsonObject.getString("name"),jsonObject.getString("summary"),jsonObject.getString("type"),price,jsonObject.getString("offer").toString());
+                Pizza Pizza = new Pizza(jsonObject.getString("name"), jsonObject.getString("summary"), jsonObject.getString("type"), price, jsonObject.getString("offer").toString());
                 Pizzas.add(Pizza);
             }
         } catch (JSONException e) {

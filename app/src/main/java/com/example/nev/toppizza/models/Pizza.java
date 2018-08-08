@@ -4,17 +4,17 @@ import java.util.Arrays;
 
 public class Pizza {
 
-    private  String name;
+    private String name;
     private String summary;
     private String type;
-    private String[] price= new String[3];
+    private String[] price = new String[3];
     private String offer;
 
     public Pizza(String name, String summary, String type, String[] price, String offer) {
-         setName( name);
+        setName(name);
         setSummary(summary);
         setType(type);
-        setPrice( price);
+        setPrice(price);
         setOffer(offer);
     }
 

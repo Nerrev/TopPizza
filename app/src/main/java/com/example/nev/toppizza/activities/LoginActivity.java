@@ -20,7 +20,6 @@ import com.example.nev.toppizza.services.SQLhelper;
 public class LoginActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
