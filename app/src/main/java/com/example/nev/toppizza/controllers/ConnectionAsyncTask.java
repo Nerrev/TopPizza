@@ -7,6 +7,7 @@ import android.os.Handler;
 
 import com.example.nev.toppizza.activities.StartActivity;
 import com.example.nev.toppizza.models.Pizza;
+import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.PizzaJasonParser;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
 
     Activity activity;
     private ProgressDialog dialog;
+    boolean connected=true;
 
     public ConnectionAsyncTask(Activity activity) {
         this.activity = activity;
@@ -30,8 +32,19 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
+        String data=null;
+        try
+        {
+            if (Functions.isNetworkAvailable(activity))
+                data = HttpManager.getData(params[0]);
+            else
+                connected=false;
+        }
+        catch (Exception ex)
+        {
+            connected=false;
+        }
 
-        String data = HttpManager.getData(params[0]);
         return data;
     }
 
@@ -39,7 +52,7 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        if (s != null) {
+        if (!connected || s != null) {
             ((StartActivity) activity).setButtonProg(100);
             List<Pizza> pizza = PizzaJasonParser.getObjectFromJason(s);
             ((StartActivity) activity).loadPizza(pizza);

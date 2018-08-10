@@ -1,7 +1,7 @@
 package com.example.nev.toppizza.activities;
 
 
-import android.app.Fragment;
+
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.AddAdmin;
+import com.example.nev.toppizza.fragments.AddAdvertFragment;
 import com.example.nev.toppizza.fragments.DelUserFragment;
 
 public class AdminActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class AdminActivity extends AppCompatActivity {
     private LinearLayout adminLayout;
     private DelUserFragment delUserFragment;
     private AddAdmin addAdmin;
+    private AddAdvertFragment addAdvertFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,15 +33,28 @@ public class AdminActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+                    fragmentTransaction.replace(R.id.adminLyt,delUserFragment,"DU");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commitAllowingStateLoss();
                     return true;
                 case R.id.navigation_AddAdmin:
                     fragmentTransaction.replace(R.id.adminLyt,addAdmin,"AA");
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();
                     return true;
-                case R.id.navigation_DeleteCustomer:
+
+                case R.id.navigation_orders:
                     fragmentTransaction.replace(R.id.adminLyt,delUserFragment,"DU");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commitAllowingStateLoss();
+                    return true;
+                case R.id.navigation_statistics:
+                    fragmentTransaction.replace(R.id.adminLyt,delUserFragment,"DU");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commitAllowingStateLoss();
+                    return true;
+                case R.id.navigation_adverts:
+                    fragmentTransaction.replace(R.id.adminLyt,addAdvertFragment,"AD");
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();
                     return true;
@@ -56,6 +71,7 @@ public class AdminActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         delUserFragment= new DelUserFragment();
         addAdmin=new AddAdmin();
+        addAdvertFragment= new AddAdvertFragment();
 
     }
 

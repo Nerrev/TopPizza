@@ -3,10 +3,18 @@ package com.example.nev.toppizza.services;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -204,6 +212,32 @@ public class Functions {
                 .setTitle(title);
         return builder.create();
     }
+    public static boolean isNetworkAvailable(Context context)
+    {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+    public static  Bitmap getImage(byte[] imgByte){
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+    public static void delay(long duration) {
+        Handler h = new Handler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+            }
+        };
+        h.postDelayed(r, duration);
+
+    }
 
 }

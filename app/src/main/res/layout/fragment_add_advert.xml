@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.AddAdvertFragment">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+
+  <ImageView
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_gravity="center"
+      android:layout_marginTop="20dp"
+      android:src="@drawable/logo" />
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:layout_marginTop="20dp"
+      android:gravity="center">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_gravity="center"
+       android:layout_marginTop="100dp"
+       android:gravity="center"
+       android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/advertImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="16dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/ic_action_cancel" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Insert Advert Image"
+        android:textSize="30dp" />
+
+    <DatePicker
+        android:id="@+id/offerStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"></DatePicker>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=" Offer Start Date"
+        android:textSize="30dp" />
+
+    <DatePicker
+        android:id="@+id/offerEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"></DatePicker>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Offer End Date"
+        android:textSize="30dp" />
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/submitAdBtn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        app:cpb_cornerRadius="20dp"
+        app:cpb_iconComplete="@drawable/ic_action_accept"
+        app:cpb_iconError="@drawable/ic_action_cancel"
+        app:cpb_selectorComplete="@color/green"
+        app:cpb_selectorError="@color/red"
+        app:cpb_selectorIdle="@color/green"
+        app:cpb_textIdle="Submit" />
+
+
+   </LinearLayout>
+  </ScrollView>
+ </LinearLayout>
+</FrameLayout>

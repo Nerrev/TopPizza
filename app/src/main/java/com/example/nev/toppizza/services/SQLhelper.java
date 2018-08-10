@@ -11,6 +11,7 @@ import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.models.User;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,6 +48,23 @@ public class SQLhelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             db.insertOrThrow("USER", null, contentValues);
+            return true;
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+    public boolean insertAdvert(Date start, Date end, byte[] img){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("START_DATE", start.toString());
+        contentValues.put("END_DATE", end.toString());
+        contentValues.put("AD", img);
+
+
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.insertOrThrow("ADVERT", null, contentValues);
             return true;
         } catch (SQLiteException e) {
             e.printStackTrace();
