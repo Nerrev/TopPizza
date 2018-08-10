@@ -35,7 +35,7 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 userin = null;
 
-                Intent i = new Intent(UserActivity.this, BeginActivity.class);
+                Intent i = new Intent(UserActivity.this, LoginActivity.class);
                 UserActivity.this.startActivity(i);
                 finish();
 
