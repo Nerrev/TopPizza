@@ -113,10 +113,12 @@ public class SignupActivity extends AppCompatActivity {
                     } else { //sign up
 
                         SQLhelper d = new SQLhelper(SignupActivity.this);
-                        if (!d.insertUser(user))
+                        if (!d.insertUser(user)) {
                             Toast.makeText(getApplicationContext(), "Error: Used Email, please use another one.",
                                     Toast.LENGTH_LONG).show();
-
+                            sign.setProgress(-1);
+                            delay();
+                        }
 
                         else {
                             sign.setProgress(100);

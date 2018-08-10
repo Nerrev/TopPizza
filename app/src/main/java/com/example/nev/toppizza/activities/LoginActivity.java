@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.services.Functions;
+import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
 
 
@@ -79,8 +80,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                     } else {
-                        UserActivity.userin = cursor;
-                        Toast.makeText(getApplicationContext(), "Login Successful",
+                        Login.Login(cursor);
+                        Toast.makeText(getApplicationContext(), "Welcome",
                                 Toast.LENGTH_LONG).show();
 
 
@@ -100,12 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("Admin")){
-                            Intent i = new Intent(LoginActivity.this, UserActivity.class); // change activity
+                            Intent i = new Intent(LoginActivity.this, AdminActivity.class); // change activity
                             LoginActivity.this.startActivity(i);
 
 
                         }
-                        else {
+                        else if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("User")) {
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             LoginActivity.this.startActivity(i);
                         }

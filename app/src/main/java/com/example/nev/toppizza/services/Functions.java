@@ -1,6 +1,9 @@
 package com.example.nev.toppizza.services;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Base64;
 import android.util.Log;
 
@@ -180,6 +183,26 @@ public class Functions {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public AlertDialog popup(Activity activity,String message,String title){
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+
+        builder.setMessage(message)
+                .setTitle(title);
+        return builder.create();
     }
 
 

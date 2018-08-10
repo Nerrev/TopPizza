@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".fragments.DelUserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/delEmail"
+       android:hint="Email"
+       android:inputType="textEmailAddress"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/delBtn"
+        android:text="Delete Customer">
+    </Button>
+    </LinearLayout>
 </FrameLayout>

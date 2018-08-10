@@ -9,10 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.services.Login;
 
 
 public class UserActivity extends AppCompatActivity {
-    public static Cursor userin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,6 @@ public class UserActivity extends AppCompatActivity {
         TextView pass = (TextView) findViewById(R.id.upassword);
         TextView email = (TextView) findViewById(R.id.uemail);
 
-        name.setText("name: " + this.userin.getString(this.userin.getColumnIndex("FNAME")));
-        pass.setText("Password: " + this.userin.getString(this.userin.getColumnIndex("PASSWORD")));
-        email.setText("Email: " + this.userin.getString(this.userin.getColumnIndex("EMAIL")));
 
 
         Button logout = (Button) findViewById(R.id.logout);
@@ -33,8 +31,7 @@ public class UserActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userin = null;
-
+                Login.Logout();
                 Intent i = new Intent(UserActivity.this, LoginActivity.class);
                 UserActivity.this.startActivity(i);
                 finish();

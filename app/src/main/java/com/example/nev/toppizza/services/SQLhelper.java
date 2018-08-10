@@ -55,12 +55,27 @@ public class SQLhelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getUserById(String id) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from USER where ID=" + id, null);
+    public boolean deleteUser(String email) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor=getUserByEmail(email);
+        if (!cursor.moveToFirst())
+            return false;
 
-        return cursor;
+        String mail = cursor.getString(cursor.getColumnIndex("EMAIL"));
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("EMAIL",mail+"#"+cursor.getString(cursor.getColumnIndex("ID")));
+        contentValues.put("TYPE", "DELETED");
+
+            try {
+                db.updateWithOnConflict("USER", contentValues,"EMAIL='"+mail+"'" , null,SQLiteDatabase.CONFLICT_ABORT);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+        return true;
     }
+
 
     public Cursor getUserByEmail(String email) {
         SQLiteDatabase db = getReadableDatabase();
