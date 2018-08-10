@@ -62,12 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                 String passt = pass.getText().toString();
                 SQLhelper dbHelper = new SQLhelper(LoginActivity.this);
 
+                Cursor cursor = dbHelper.getUserByEmail(emailt);
                 if (!Functions.checkEmail(emailt) || !Functions.checkPass(passt)) {
 
                     Toast.makeText(getApplicationContext(), "Wrong email or password",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    Cursor cursor = dbHelper.getUserByEmail(emailt);
+
 
 
                     if (!cursor.moveToFirst()) {
@@ -98,9 +99,16 @@ public class LoginActivity extends AppCompatActivity {
                             ed.commit();
                         }
 
-                        Intent i = new Intent(LoginActivity.this, UserActivity.class);
-                        LoginActivity.this.startActivity(i);
-                        finish();
+                        if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("Admin")){
+                            Intent i = new Intent(LoginActivity.this, UserActivity.class); // change activity
+                            LoginActivity.this.startActivity(i);
+
+
+                        }
+                        else {
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            LoginActivity.this.startActivity(i);
+                        }
                     }
                 }
 
