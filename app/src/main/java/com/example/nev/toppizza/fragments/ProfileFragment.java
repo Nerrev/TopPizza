@@ -39,13 +39,23 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
     private static int RESULT_LOAD_IMAGE = 1;
     private Activity activity;
     CircularProgressButton passwordConfirm;
     CircularProgressButton infoConfirm;
+
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity=getActivity();
+
+        // REMOVE
+        SQLhelper dbh = new SQLhelper(activity);
+        Login.user=dbh.getUserByEmail("admin2@gmail.com");
+        Login.user.moveToNext();
+
+        //REMOVE
+
         passwordConfirm = activity.findViewById(R.id.Pconfirm);
         infoConfirm = activity.findViewById(R.id.Pedit);
         final TextView email = (TextView) activity.findViewById(R.id.profileEmail);
@@ -187,20 +197,25 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), selectedImage);
-                final ImageButton profilePic = activity.findViewById(R.id.profilePic);
-                final TextView email = (TextView) activity.findViewById(R.id.profileEmail);
-                profilePic.setImageBitmap(bitmap);
-                SQLhelper dbh = new SQLhelper(activity);
-                if( !dbh.updateUser(email.getText().toString(),null,null,Functions.getBitmapAsByteArray(bitmap),null,null)) {
-                    Toast.makeText(activity, "Something Went Wrong",
+                if(!Functions.validateImage(bitmap,200)){
+                    Toast.makeText(activity, "Picture size is too big.",
                             Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Login.user=dbh.getUserByEmail(email.getText().toString());
-                    resetScene();
-                    activity.recreate();
-                    Toast.makeText(activity, "Profile picture changed Successfully.",
-                            Toast.LENGTH_LONG).show();
+                    final ImageButton profilePic = activity.findViewById(R.id.profilePic);
+                    final TextView email = (TextView) activity.findViewById(R.id.profileEmail);
+                    profilePic.setImageBitmap(bitmap);
+                    SQLhelper dbh = new SQLhelper(activity);
+                    if (!dbh.updateUser(email.getText().toString(), null, null, Functions.getBitmapAsByteArray(bitmap), null, null)) {
+                        Toast.makeText(activity, "Something Went Wrong",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Login.user = dbh.getUserByEmail(email.getText().toString());
+                        resetScene();
+                        activity.recreate();
+                        Toast.makeText(activity, "Profile picture changed Successfully.",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             } catch (FileNotFoundException e) {
                 Toast.makeText(activity, "Something Went Wrong. Couldn't change profile Picture",

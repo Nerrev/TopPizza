@@ -229,6 +229,17 @@ public class Functions {
     public static  Bitmap getImage(byte[] imgByte){
             return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
         }
+
+
+      public static boolean validateImage(Bitmap image,long maxSize){
+
+        if(image.getHeight() > maxSize || image.getWidth() > maxSize)
+            return false;
+
+        return true;
+      }
+
+
     public static void delay(long duration) {
         Handler h = new Handler();
         Runnable r = new Runnable() {
@@ -240,6 +251,6 @@ public class Functions {
         };
         h.postDelayed(r, duration);
 
-    }
+}
 
 }
