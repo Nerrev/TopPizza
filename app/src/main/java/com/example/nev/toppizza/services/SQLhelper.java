@@ -73,6 +73,35 @@ public class SQLhelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updateUser(String email,String firstName, String lastName, byte[] profilePic, String phone, String passwrod){
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor=getUserByEmail(email);
+        if (!cursor.moveToFirst())
+            return false;
+
+        ContentValues contentValues = new ContentValues();
+        if(firstName!=null)
+            contentValues.put("FNAME",firstName);
+        if(lastName!=null)
+            contentValues.put("LNAME",lastName);
+        if(phone!=null)
+            contentValues.put("PHONE",phone);
+        if(profilePic!=null)
+            contentValues.put("IMAGE",profilePic);
+        if(passwrod!=null)
+            contentValues.put("PASSWORD",passwrod);
+
+        try {
+            db.updateWithOnConflict("USER", contentValues,"EMAIL='"+email+"'" , null,SQLiteDatabase.CONFLICT_ABORT);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public boolean deleteUser(String email) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor=getUserByEmail(email);

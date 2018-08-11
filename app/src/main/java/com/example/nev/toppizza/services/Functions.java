@@ -234,6 +234,8 @@ public class Functions {
         Runnable r = new Runnable() {
             @Override
             public void run() {
+                int j=0;
+                j++;
             }
         };
         h.postDelayed(r, duration);

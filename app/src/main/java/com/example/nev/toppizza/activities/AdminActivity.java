@@ -16,6 +16,7 @@ import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.AddAdmin;
 import com.example.nev.toppizza.fragments.AddAdvertFragment;
 import com.example.nev.toppizza.fragments.DelUserFragment;
+import com.example.nev.toppizza.fragments.ProfileFragment;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class AdminActivity extends AppCompatActivity {
     private DelUserFragment delUserFragment;
     private AddAdmin addAdmin;
     private AddAdvertFragment addAdvertFragment;
+    private ProfileFragment profileFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,7 +35,7 @@ public class AdminActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragmentTransaction.replace(R.id.adminLyt,delUserFragment,"DU");
+                    fragmentTransaction.replace(R.id.adminLyt,profileFragment,"PR");
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();
                     return true;
@@ -72,6 +74,7 @@ public class AdminActivity extends AppCompatActivity {
         delUserFragment= new DelUserFragment();
         addAdmin=new AddAdmin();
         addAdvertFragment= new AddAdvertFragment();
+        profileFragment= new ProfileFragment();
 
     }
 

@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                     } else {
-                        Login.Login(cursor);
+                        Login.user=cursor;
                         Toast.makeText(getApplicationContext(), "Welcome",
                                 Toast.LENGTH_LONG).show();
 
