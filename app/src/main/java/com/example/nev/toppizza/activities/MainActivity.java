@@ -32,15 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        RelativeLayout menu = findViewById(R.id.menu);
-        menu.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
+        ImageView menu = findViewById(R.id.menuBtn);
 
-                return false;
-            }
-        });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

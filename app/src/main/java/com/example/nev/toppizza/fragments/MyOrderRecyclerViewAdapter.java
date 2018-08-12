@@ -8,16 +8,10 @@ import android.widget.TextView;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.OrderFragment.OnListFragmentInteractionListener;
-import com.example.nev.toppizza.fragments.dummy.DummyContent.DummyItem;
 import com.example.nev.toppizza.models.Order;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecyclerViewAdapter.ViewHolder> {
 
     private final List<Order> mValues;

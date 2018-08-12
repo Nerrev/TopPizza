@@ -27,6 +27,7 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/menuBtn"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"

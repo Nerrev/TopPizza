@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nev.toppizza.R;
-import com.example.nev.toppizza.fragments.dummy.DummyContent;
-import com.example.nev.toppizza.fragments.dummy.DummyContent.DummyItem;
 import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.services.SQLhelper;
 
