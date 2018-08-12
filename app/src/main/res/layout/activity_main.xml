@@ -50,6 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:id="@+id/logo"
                 android:src="@drawable/logo" />
 
             <RelativeLayout
