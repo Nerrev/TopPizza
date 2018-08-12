@@ -1,46 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
+    <include
+        layout="@layout/app_bar_user"
         android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_marginTop="73dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log Out" />
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_user"
+        app:menu="@menu/activity_user_drawer" />
 
-
-        <TextView
-            android:id="@+id/uname"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Username:" />
-
-        <TextView
-            android:id="@+id/uemail"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:text="Email:" />
-
-        <TextView
-            android:id="@+id/upassword"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:text="Password:" />
-
-
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.DrawerLayout>
