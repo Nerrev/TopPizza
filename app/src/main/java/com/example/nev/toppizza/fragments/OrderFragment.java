@@ -2,6 +2,7 @@ package com.example.nev.toppizza.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,15 +15,13 @@ import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.dummy.DummyContent;
 import com.example.nev.toppizza.fragments.dummy.DummyContent.DummyItem;
 import com.example.nev.toppizza.models.Order;
+import com.example.nev.toppizza.services.SQLhelper;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
+
 public class OrderFragment extends Fragment {
 
     // TODO: Customize parameters
@@ -54,7 +53,24 @@ public class OrderFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            List<Order> ordersList=null;
+            List<Order> ordersList=new ArrayList<Order>();
+
+
+            SQLhelper dbh = new SQLhelper(getActivity());
+            Cursor orders= dbh.getAllOrders() ;
+
+            while(orders.moveToNext()){
+                Order order=new Order();
+                order.setPayment(orders.getInt(orders.getColumnIndex("PAYMENT")));
+                order.setOdate(orders.getString(orders.getColumnIndex("ORDERDATE")));
+                Cursor customer = dbh.getUserName(orders.getInt(orders.getColumnIndex("ID")));
+                customer.moveToNext();
+                order.setCustomer(customer.getString(customer.getColumnIndex("NAME")));
+                ordersList.add(order);
+            }
+
+
+
             recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener));
         }
         return view;

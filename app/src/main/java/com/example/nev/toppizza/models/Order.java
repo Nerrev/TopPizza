@@ -7,6 +7,8 @@ public class Order {
     private int pizza;
     private int payment;
     private Date date;
+    private String customer;
+    private String odate;
 
 
     public Order(int user, int pizza, int payment, Date date) {
@@ -14,6 +16,17 @@ public class Order {
         setPizza(pizza);
         setPayment(payment);
         setDate(date);
+    }
+    public Order(){
+
+    }
+
+    public String getOdate() {
+        return odate;
+    }
+
+    public void setOdate(String odate) {
+        this.odate = odate;
     }
 
     public int getUser() {
@@ -46,5 +59,13 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 }

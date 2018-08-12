@@ -26,8 +26,8 @@ public class SQLhelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE USER(ID INTEGER  PRIMARY KEY AUTOINCREMENT,FNAME TEXT,LNAME TEXT,PHONE TEXT,GENDER TEXT, EMAIL TEXT UNIQUE,PASSWORD TEXT,TYPE TEXT, IMAGE BLOB)");
         db.execSQL("CREATE TABLE PIZZA(PID INTEGER  PRIMARY KEY AUTOINCREMENT,NAME TEXT,SUMMARY TEXT,TYPE TEXT,SPRICE TEXT,MPRICE TEXT,LPRICE TEXT,OFFER TEXT)");
         db.execSQL("CREATE TABLE FAVORITES(FID INTEGER  PRIMARY KEY AUTOINCREMENT,ID INTEGER,PID INTEGER,FOREIGN KEY(ID) REFERENCES USER(ID),FOREIGN KEY(PID) REFERENCES PIZZA(PID))");
-        db.execSQL("CREATE TABLE ORDERS(OID INTEGER  PRIMARY KEY AUTOINCREMENT,ID INTEGER,PID INTEGER, PAYMENT TEXT,ORDERDATE DATE,FOREIGN KEY(ID) REFERENCES USER(ID),FOREIGN KEY(PID) REFERENCES PIZZA(PID))");
-        db.execSQL("CREATE TABLE Advert(AID INTEGER  PRIMARY KEY AUTOINCREMENT, AD BLOB,START_DATE DATE,END_DATE DATE )");
+        db.execSQL("CREATE TABLE ORDERS(OID INTEGER  PRIMARY KEY AUTOINCREMENT,ID INTEGER,PID INTEGER, PAYMENT TEXT,ORDERDATE TEXT,FOREIGN KEY(ID) REFERENCES USER(ID),FOREIGN KEY(PID) REFERENCES PIZZA(PID))");
+        db.execSQL("CREATE TABLE Advert(AID INTEGER  PRIMARY KEY AUTOINCREMENT, AD BLOB,START_DATE TEXT,END_DATE TEXT )");
     }
 
     @Override
@@ -130,6 +130,12 @@ public class SQLhelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+    public Cursor getUserName(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select NAME from USER where ID=" + id + "", null);
+
+        return cursor;
+    }
 
     public Cursor getAllUsers() {
         SQLiteDatabase db = getReadableDatabase();
@@ -159,6 +165,14 @@ public class SQLhelper extends SQLiteOpenHelper {
     public Cursor getUserFavorites(int user) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from PIZZA, FAVORITES WHERE PIZZA.PID=FAVORITES.PID and FAVORITES.ID=" + user, null);
+
+        return cursor;
+
+    }
+
+    public Cursor getAllOrders() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from ORDERS", null);
 
         return cursor;
 

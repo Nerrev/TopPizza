@@ -40,7 +40,7 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
         holder.mOrder = mValues.get(position);
         holder.orderDate.setText(mValues.get(position).getDate().toString());
         holder.payment.setText("100");
-        holder.pizza.setText("PIZZA");
+        holder.customer.setText("PIZZA");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,8 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
 
     @Override
     public int getItemCount() {
+        if(mValues.isEmpty())
+            return 0;
         return mValues.size();
     }
 
@@ -63,7 +65,7 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
         public final View mView;
         public final TextView orderDate;
         public final TextView payment;
-        public final TextView pizza;
+        public final TextView customer;
 
         public Order mOrder;
 
@@ -72,7 +74,7 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
             mView = view;
             orderDate = (TextView) view.findViewById(R.id.OrderDate);
             payment= (TextView) view.findViewById(R.id.orderPayment);
-            pizza= (TextView) view.findViewById(R.id.order_pizza);
+            customer= (TextView) view.findViewById(R.id.orderCustomer);
         }
 
         @Override

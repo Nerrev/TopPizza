@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.services.SQLhelper;
 
@@ -35,8 +36,10 @@ public class DelUserFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button delCustomerButton= getActivity().findViewById(R.id.delBtn);
+        final CircularProgressButton delCustomerButton= getActivity().findViewById(R.id.delBtn);
         final EditText accEmail=getActivity().findViewById(R.id.delEmail);
+        delCustomerButton.setIndeterminateProgressMode(true);
+        delCustomerButton.setProgress(0);
         delCustomerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,15 +47,21 @@ public class DelUserFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        delCustomerButton.setProgress(50);
                         SQLhelper dbh= new SQLhelper(getActivity());
                         if(dbh.deleteUser(accEmail.getText().toString())) {
                             Toast.makeText(getActivity(), "Account Deleted.",
                                     Toast.LENGTH_LONG).show();
-                            accEmail.setText("Done");
+                            accEmail.setText("");
+                            delCustomerButton.setProgress(100);
+                            getActivity().recreate();
                         }
-                        else
+                        else{
                             Toast.makeText(getActivity(), "Couldn't Find customer!",
                                     Toast.LENGTH_LONG).show();
+                            delCustomerButton.setProgress(-1);
+                            getActivity().recreate();
+                        }
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
