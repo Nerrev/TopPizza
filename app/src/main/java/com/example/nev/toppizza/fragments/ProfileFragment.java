@@ -68,9 +68,12 @@ public class ProfileFragment extends Fragment {
         final EditText conpass = (EditText) activity.findViewById(R.id.Pconpass);
 
         byte[] profilePicture=null;
-        profilePicture = Login.user.getBlob(Login.user.getColumnIndex("IMAGE"));
-        if(profilePicture!=null && profilePicture.length>0)
-        profilePic.setImageBitmap(Functions.getImage(profilePicture));
+        int index=Login.user.getColumnIndex("IMAGE");
+        if(index!=-1) {
+            profilePicture = Login.user.getBlob(index);
+            if (profilePicture != null && profilePicture.length > 0)
+                profilePic.setImageBitmap(Functions.getImage(profilePicture));
+        }
         email.setText(Login.user.getString(Login.user.getColumnIndex("EMAIL")));
 
         firstName.setText(Login.user.getString(Login.user.getColumnIndex("FNAME")));
