@@ -16,15 +16,18 @@ import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.AddAdmin;
 import com.example.nev.toppizza.fragments.AddAdvertFragment;
 import com.example.nev.toppizza.fragments.DelUserFragment;
+import com.example.nev.toppizza.fragments.OrderFragment;
 import com.example.nev.toppizza.fragments.ProfileFragment;
+import com.example.nev.toppizza.models.Order;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity  implements OrderFragment.OnListFragmentInteractionListener {
 
     private LinearLayout adminLayout;
     private DelUserFragment delUserFragment;
     private AddAdmin addAdmin;
     private AddAdvertFragment addAdvertFragment;
     private ProfileFragment profileFragment;
+    private OrderFragment orderFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,7 +49,7 @@ public class AdminActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_orders:
-                    fragmentTransaction.replace(R.id.adminLyt,delUserFragment,"DU");
+                    fragmentTransaction.replace(R.id.adminLyt,orderFragment,"OR");
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();
                     return true;
@@ -64,6 +67,9 @@ public class AdminActivity extends AppCompatActivity {
             return false;
         }
     };
+    public void onListFragmentInteraction(Order order){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,7 @@ public class AdminActivity extends AppCompatActivity {
         addAdmin=new AddAdmin();
         addAdvertFragment= new AddAdvertFragment();
         profileFragment= new ProfileFragment();
+        orderFragment=new OrderFragment();
 
     }
 
