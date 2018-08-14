@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.CircularProgressButton;
@@ -52,7 +53,7 @@ public class ProfileFragment extends Fragment {
         passwordConfirm = activity.findViewById(R.id.Pconfirm);
         infoConfirm = activity.findViewById(R.id.Pedit);
         final TextView email = (TextView) activity.findViewById(R.id.profileEmail);
-        final ImageButton profilePic = activity.findViewById(R.id.profilePic);
+        final ImageView profilePic = activity.findViewById(R.id.profilePic);
         final EditText firstName = (EditText) activity.findViewById(R.id.PfirstName);
         final EditText newPass = (EditText) activity.findViewById(R.id.Ppass);
         final EditText oldPass = (EditText) activity.findViewById(R.id.PoldPass);

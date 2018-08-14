@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.models.Pizza;
+import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
 
 
@@ -23,7 +24,8 @@ import java.util.List;
 public class PizzaFragment extends Fragment {
 
     private int mColumnCount = 1;
-
+    final int FAVORITE_MODE=1;
+    final int OFFERS_MODE=2;
     private OnListFragmentInteractionListener mListener;
 
     public PizzaFragment() {
@@ -53,7 +55,15 @@ public class PizzaFragment extends Fragment {
 
 
             SQLhelper dbh = new SQLhelper(getActivity());
-            Cursor pizzas= dbh.getAllPizza() ;
+            Cursor pizzas;
+            int mode=0;
+            mode=getArguments().getInt("mode");
+            if( mode == FAVORITE_MODE)
+                pizzas= dbh.getUserFavorites(Login.user.getInt(Login.user.getColumnIndex("ID")));
+            else if(mode == OFFERS_MODE)
+                pizzas= dbh.getOffers() ;
+            else
+                pizzas= dbh.getAllPizza() ;
 
             while(pizzas.moveToNext()){
                 String name;

@@ -23,7 +23,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="90dp"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo"
+                android:id="@+id/userLogo"/>
 
             <ImageView
                 android:layout_width="35dp"

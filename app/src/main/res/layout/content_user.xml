@@ -7,11 +7,55 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.UserActivity"
     tools:showIn="@layout/app_bar_user">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:id="@+id/Mtypes"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/edit_text_style"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"/>
+
+
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:id="@+id/Msizes"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/edit_text_style"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="35dp"
+            android:visibility="gone"/>
+
+
+        <EditText
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:hint="Price"
+            android:id="@+id/Mprice"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
 
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/userActivityHolder"></RelativeLayout>
+
+
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

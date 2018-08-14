@@ -1,6 +1,7 @@
 package com.example.nev.toppizza.fragments;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,13 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
 
     private final List<Order> mValues;
     private final OnListFragmentInteractionListener mListener;
-
-    public MyOrderRecyclerViewAdapter(List<Order> items, OnListFragmentInteractionListener listener) {
+    final int USER_ORDERS=1;
+    int mode=0;
+    public MyOrderRecyclerViewAdapter(List<Order> items, OnListFragmentInteractionListener listener,int mode) {
         mValues = items;
         mListener = listener;
+        this.mode=mode;
+
     }
 
     @Override
@@ -32,9 +36,12 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mOrder = mValues.get(position);
-        holder.orderDate.setText(mValues.get(position).getDate().toString());
-        holder.payment.setText("100");
-        holder.customer.setText("PIZZA");
+        holder.payment.setText(mValues.get(position).getPayment());
+        holder.orderDate.setText(mValues.get(position).getOdate());
+        if(mode == USER_ORDERS)
+        holder.customer.setText(mValues.get(position).getPizzaName());
+        else
+            holder.customer.setText(mValues.get(position).getCustomer());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +73,7 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            orderDate = (TextView) view.findViewById(R.id.OrderDate);
+            orderDate = (TextView) view.findViewById(R.id.orderDate);
             payment= (TextView) view.findViewById(R.id.orderPayment);
             customer= (TextView) view.findViewById(R.id.orderCustomer);
         }

@@ -3,6 +3,7 @@ package com.example.nev.toppizza.activities;
 import android.app.FragmentManager;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -14,11 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.fragments.ContactUsFragment;
+import com.example.nev.toppizza.fragments.OrderFragment;
 import com.example.nev.toppizza.fragments.PizzaDialogFragment;
 import com.example.nev.toppizza.fragments.PizzaFragment;
+import com.example.nev.toppizza.fragments.ProfileFragment;
 import com.example.nev.toppizza.fragments.UserHomeFragment;
+import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.Login;
@@ -26,7 +32,8 @@ import com.example.nev.toppizza.services.SQLhelper;
 
 
 public class UserActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PizzaFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PizzaFragment.OnListFragmentInteractionListener
+,OrderFragment.OnListFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +43,18 @@ public class UserActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View view, float v) {
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View view) {
+
                 ImageView profilePic= (ImageView)  findViewById(R.id.uProfilePicture);
                 TextView userName= (TextView)  findViewById(R.id.uuserName);
                 TextView userEmail= (TextView)  findViewById(R.id.uuserEmail);
@@ -60,11 +72,19 @@ public class UserActivity extends AppCompatActivity
 
                 userName.setText(Login.user.getString(Login.user.getColumnIndex("FNAME"))+" "+Login.user.getString(Login.user.getColumnIndex("LNAME")));
                 userEmail.setText(Login.user.getString(Login.user.getColumnIndex("EMAIL")));
-            }
+                LinearLayout profileHeader= findViewById(R.id.profHeader);
+                profileHeader.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onDrawerOpened(@NonNull View view) {
-
+                    @Override
+                    public void onClick(View v) {
+                        drawer.closeDrawers();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.userActivityHolder,new ProfileFragment(),"UPR");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                });
             }
 
             @Override
@@ -88,13 +108,32 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         ///////////////////////////////////////////////////////////////
+        ImageView ordersBtn= (ImageView) findViewById(R.id.appBarOrders);
+        ordersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Bundle bundl = new Bundle();
+                bundl.putInt("mode", 1);
+                OrderFragment of=new OrderFragment();
+                of.setArguments(bundl);
+                fragmentTransaction.replace(R.id.userActivityHolder,of,"UOR");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
 
 
         //REMOVE
 
+
+
         SQLhelper dbh=new SQLhelper(this);
         Login.user=dbh.getUserByEmail("mail@gmail.com");
         Login.user.moveToNext();
+
 
         //REMOVE
 
@@ -126,20 +165,55 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }else if (id == R.id.nav_Pizza) {
-            fragmentTransaction.replace(R.id.userActivityHolder,new PizzaFragment(),"PZ");
+            Bundle bundl = new Bundle();
+            bundl.putInt("mode",0);
+            PizzaFragment of=new PizzaFragment();
+            of.setArguments(bundl);
+            fragmentTransaction.replace(R.id.userActivityHolder,of,"PZ");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yFavorites) {
+            Bundle bundl = new Bundle();
+            bundl.putInt("mode", 1);
+           PizzaFragment of=new PizzaFragment();
+            of.setArguments(bundl);
+            fragmentTransaction.replace(R.id.userActivityHolder,of,"UFV");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yOffers) {
+            Bundle bundl = new Bundle();
+            bundl.putInt("mode", 2);
+            PizzaFragment of=new PizzaFragment();
+            of.setArguments(bundl);
+            fragmentTransaction.replace(R.id.userActivityHolder,of,"UOF");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yorders) {
-
+            Bundle bundl = new Bundle();
+            bundl.putInt("mode", 1);
+            OrderFragment of=new OrderFragment();
+            of.setArguments(bundl);
+            fragmentTransaction.replace(R.id.userActivityHolder,of,"UOR");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_CallUs) {
+            fragmentTransaction.replace(R.id.userActivityHolder,new ContactUsFragment(),"UOR");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yLogout) {
+            Login.Logout();
+            Intent i = new Intent(UserActivity.this, LoginActivity.class);
+            UserActivity.this.startActivity(i);
+            finish();
 
+        }else if (id == R.id.nav_yProfile) {
+            fragmentTransaction.replace(R.id.userActivityHolder,new ProfileFragment(),"UPR");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,5 +226,7 @@ public class UserActivity extends AppCompatActivity
         PizzaDialogFragment pizzaDialog = PizzaDialogFragment.newInstance(pizza);
 
         pizzaDialog.show(fm,"PZD");
+    }
+    public void onListFragmentInteraction(Order order){
     }
 }

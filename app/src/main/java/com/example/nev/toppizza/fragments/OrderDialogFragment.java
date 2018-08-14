@@ -20,6 +20,7 @@ import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
 
+import java.util.Date;
 
 
 public class OrderDialogFragment extends DialogFragment {
@@ -67,7 +68,7 @@ public class OrderDialogFragment extends DialogFragment {
 
        final  Spinner oSize = (Spinner) view.findViewById(R.id.Osize);
         String[] options = {"Small", "Medium", "Large"};
-        ArrayAdapter objGenderArr = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, options);
+        ArrayAdapter objGenderArr = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, options);
         oSize.setAdapter(objGenderArr);
 
 
@@ -99,7 +100,11 @@ public class OrderDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 SQLhelper dbh= new SQLhelper(getActivity());
-                dbh.insertOrder(new Order(Login.user.getInt(Login.user.getColumnIndex("ID")),pizza.getPid(),oPrice.getText().toString(),new java.sql.Date(new java.util.Date().getTime())));
+                Date date=new Date();
+                String d=date.toString();
+                Order order=new Order(Login.user.getInt(Login.user.getColumnIndex("ID")),pizza.getPid(),oPrice.getText().toString(),date);
+                order.setOdate(d);
+                dbh.insertOrder(order);
                 Toast.makeText(getActivity(), "Order Complete.",
                         Toast.LENGTH_LONG).show();
                 dismiss();

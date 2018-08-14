@@ -132,7 +132,20 @@ public class SQLhelper extends SQLiteOpenHelper {
     }
     public Cursor getUserName(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select NAME from USER where ID=" + id + "", null);
+        Cursor cursor = db.rawQuery("select FNAME,LNAME from USER where ID=" + id + "", null);
+
+        return cursor;
+    }
+
+    public Cursor getOffers() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from PIZZA where OFFER='" + "yes"+ "'", null);
+        return cursor;
+    }
+
+    public Cursor getPizzaName(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select NAME from PIZZA where PID=" + id + "", null);
 
         return cursor;
     }
@@ -143,7 +156,11 @@ public class SQLhelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+    public void removeOrders(){
 
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("ORDERS","1=1",null);
+    }
     public boolean insertFavorite(int user, int pizza) {
 
         ContentValues contentValues = new ContentValues();

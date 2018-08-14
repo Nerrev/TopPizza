@@ -41,7 +41,7 @@ public class MyPizzaRecyclerViewAdapter extends RecyclerView.Adapter<MyPizzaRecy
         holder.mItem = mValues.get(position);
        holder.mPizzaType.setText("Type: "+mValues.get(position).getType());
        holder.mPizzaName.setText("Pizza: "+mValues.get(position).getName());
-       holder.mPizzaOffer.setText("Offer? "+mValues.get(position).getOffer());
+       holder.mPizzaOffer.setText("Offer ? "+mValues.get(position).getOffer());
         final int pid= mValues.get(position).getPid();
         final int index=position;
         final int FID=isFavourited(pid);

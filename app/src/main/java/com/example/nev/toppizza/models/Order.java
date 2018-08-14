@@ -1,6 +1,7 @@
 package com.example.nev.toppizza.models;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class Order {
     private int user;
@@ -9,16 +10,25 @@ public class Order {
     private Date date;
     private String customer;
     private String odate;
+    private String pizzaName;
 
 
     public Order(int user, int pizza, String payment, Date date) {
-        setUser(user);
-        setPizza(pizza);
-        setPayment(payment);
-        setDate(date);
+        this.user=user;
+        this.pizza=pizza;
+        this.payment=payment;
+        this.date=date;
     }
     public Order(){
 
+    }
+
+    public String getPizzaName() {
+        return pizzaName;
+    }
+
+    public void setPizzaName(String pizzaName) {
+        this.pizzaName = pizzaName;
     }
 
     public String getOdate() {

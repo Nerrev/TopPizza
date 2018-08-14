@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.models.Order;
+import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
 
 import java.util.ArrayList;
@@ -23,9 +25,10 @@ import java.util.List;
 public class OrderFragment extends Fragment {
 
     // TODO: Customize parameters
-    private int mColumnCount =4;
+    private int mColumnCount =1;
     private OnListFragmentInteractionListener mListener;
 
+    final int USER_ORDERS=1;
 
     public OrderFragment() {
     }
@@ -55,7 +58,13 @@ public class OrderFragment extends Fragment {
 
 
             SQLhelper dbh = new SQLhelper(getActivity());
-            Cursor orders= dbh.getAllOrders() ;
+            Cursor orders;
+            int mode=0;
+            mode=getArguments().getInt("mode");
+            if( mode == USER_ORDERS)
+                orders= dbh.getUserOrders(Login.user.getInt(Login.user.getColumnIndex("ID")));
+            else
+                orders= dbh.getAllOrders();
 
             while(orders.moveToNext()){
                 Order order=new Order();
@@ -63,13 +72,16 @@ public class OrderFragment extends Fragment {
                 order.setOdate(orders.getString(orders.getColumnIndex("ORDERDATE")));
                 Cursor customer = dbh.getUserName(orders.getInt(orders.getColumnIndex("ID")));
                 customer.moveToNext();
-                order.setCustomer(customer.getString(customer.getColumnIndex("NAME")));
+                order.setCustomer(customer.getString(customer.getColumnIndex("FNAME"))+" "+customer.getString(customer.getColumnIndex("LNAME")));
+                Cursor pizza = dbh.getPizzaName(orders.getInt(orders.getColumnIndex("PID")));
+                pizza.moveToNext();
+                order.setPizzaName(pizza.getString(pizza.getColumnIndex("NAME")));
                 ordersList.add(order);
             }
 
 
 
-            recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener));
+            recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener,mode));
         }
         return view;
     }
