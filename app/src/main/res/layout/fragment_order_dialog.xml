@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.OrderDialogFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="250dp"
+      android:orientation="vertical"
+      android:background="#0D4C33">
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_marginTop="40dp"
+          >
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Size"
+              android:textSize="25dp"
+              android:layout_marginLeft="10dp"
+              />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Price"
+              android:textSize="25dp"
+              android:layout_marginLeft="65dp"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_marginTop="10dp">
+
+          <Spinner
+              android:id="@+id/Osize"
+              android:layout_width="100dp"
+              android:layout_height="30dp"
+              android:background="@drawable/edit_text_style"
+              android:spinnerMode="dropdown" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="-1$"
+              android:textSize="25dp"
+              android:layout_marginLeft="35dp"
+              android:id="@+id/Oprice"/>
+
+      </LinearLayout>
+
+      <TextView
+          android:layout_marginTop="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="5px"
+          android:background="#B51808"
+          />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="40dp"
+          android:gravity="bottom"
+          android:layout_gravity="bottom">
+
+          <Button
+              android:layout_width="100dp"
+              android:layout_height="50dp"
+              android:text="Order"
+              android:layout_marginLeft="15dp"
+              android:id="@+id/diaOrder"
+              />
+
+          <Button
+              android:layout_width="100dp"
+              android:layout_height="50dp"
+              android:text="Cancel"
+              android:layout_marginLeft="20dp"
+              android:id="@+id/diaCancel"
+              />
+      </LinearLayout>
+
+
+  </LinearLayout>
+
+</FrameLayout>

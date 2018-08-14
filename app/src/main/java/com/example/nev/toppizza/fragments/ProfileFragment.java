@@ -49,13 +49,6 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         activity=getActivity();
 
-        // REMOVE
-        SQLhelper dbh = new SQLhelper(activity);
-        Login.user=dbh.getUserByEmail("admin2@gmail.com");
-        Login.user.moveToNext();
-
-        //REMOVE
-
         passwordConfirm = activity.findViewById(R.id.Pconfirm);
         infoConfirm = activity.findViewById(R.id.Pedit);
         final TextView email = (TextView) activity.findViewById(R.id.profileEmail);

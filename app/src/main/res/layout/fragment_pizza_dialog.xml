@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PizzaDialogFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#1B6907">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/desc"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="The Pizza "
+    android:id="@+id/PzName"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:textColor="@color/White"
+    android:textSize="13dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:background="#FF4E34"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The"
+            android:textColor="@color/White"
+            android:textSize="13dp"
+            android:id="@+id/PzSummary"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Order"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/diaOrder"
+               />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Cancel"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/diaCancel"
+               />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E84D3A"
+            android:background="#B51808"
             app:title=" "
             app:popupTheme="@style/PopupOverlay" >
 
@@ -26,10 +26,11 @@
                 android:src="@drawable/logo"/>
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginLeft="90dp"
-                android:src="@drawable/orders"/>
+                android:src="@drawable/orders"
+                android:id="@+id/appBarOrders"/>
 
         </android.support.v7.widget.Toolbar>
 

@@ -170,6 +170,19 @@ public class SQLhelper extends SQLiteOpenHelper {
 
     }
 
+    public int checkFav(int user,int pizza){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select FID from FAVORITES WHERE ID="+user+ " and PID=" + pizza, null);
+
+        if(cursor.moveToFirst())
+            return cursor.getInt(cursor.getColumnIndex("FID"));
+
+        return  -1;
+    }
+    public void deleteFavorite(int FID){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("FAVORITES","FID="+FID,null);
+    }
     public Cursor getAllOrders() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from ORDERS", null);

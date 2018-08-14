@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                         else if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("User")) {
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent i = new Intent(LoginActivity.this, UserActivity.class);
                             LoginActivity.this.startActivity(i);
                         }
                     }

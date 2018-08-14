@@ -12,22 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nev.toppizza.R;
-import com.example.nev.toppizza.models.Order;
+import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.SQLhelper;
 
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
-public class OrderFragment extends Fragment {
+public class PizzaFragment extends Fragment {
 
-    // TODO: Customize parameters
-    private int mColumnCount =4;
+    private int mColumnCount = 1;
+
     private OnListFragmentInteractionListener mListener;
 
-
-    public OrderFragment() {
+    public PizzaFragment() {
     }
 
     @Override
@@ -39,7 +38,7 @@ public class OrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_pizza_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -50,26 +49,38 @@ public class OrderFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-            List<Order> ordersList=new ArrayList<Order>();
+            List<Pizza> pizzaList = new ArrayList<>();
 
 
             SQLhelper dbh = new SQLhelper(getActivity());
-            Cursor orders= dbh.getAllOrders() ;
+            Cursor pizzas= dbh.getAllPizza() ;
 
-            while(orders.moveToNext()){
-                Order order=new Order();
-                order.setPayment(orders.getString(orders.getColumnIndex("PAYMENT")));
-                order.setOdate(orders.getString(orders.getColumnIndex("ORDERDATE")));
-                Cursor customer = dbh.getUserName(orders.getInt(orders.getColumnIndex("ID")));
-                customer.moveToNext();
-                order.setCustomer(customer.getString(customer.getColumnIndex("NAME")));
-                ordersList.add(order);
+            while(pizzas.moveToNext()){
+                String name;
+                String summary;
+                String type;
+                String[] price = new String[3];
+                String offer;
+
+              name=pizzas.getString(pizzas.getColumnIndex("NAME"));
+              summary=pizzas.getString(pizzas.getColumnIndex("SUMMARY"));
+              type=pizzas.getString(pizzas.getColumnIndex("TYPE"));
+              offer=pizzas.getString(pizzas.getColumnIndex("OFFER"));
+                price[0]=pizzas.getString(pizzas.getColumnIndex("SPRICE"));
+                price[1]=pizzas.getString(pizzas.getColumnIndex("MPRICE"));
+                price[2]=pizzas.getString(pizzas.getColumnIndex("LPRICE"));
+
+
+
+                Pizza pizza=new Pizza(name,summary,type,price,offer);
+                pizza.setPid(pizzas.getInt(pizzas.getColumnIndex("PID")));
+                pizzaList.add(pizza);
             }
 
 
 
-            recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener));
+
+            recyclerView.setAdapter(new MyPizzaRecyclerViewAdapter(pizzaList, mListener,getActivity()));
         }
         return view;
     }
@@ -93,7 +104,6 @@ public class OrderFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(Order order);
+        void onListFragmentInteraction(Pizza pizza);
     }
 }

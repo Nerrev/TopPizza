@@ -5,13 +5,13 @@ import java.sql.Date;
 public class Order {
     private int user;
     private int pizza;
-    private int payment;
+    private String payment;
     private Date date;
     private String customer;
     private String odate;
 
 
-    public Order(int user, int pizza, int payment, Date date) {
+    public Order(int user, int pizza, String payment, Date date) {
         setUser(user);
         setPizza(pizza);
         setPayment(payment);
@@ -45,11 +45,11 @@ public class Order {
         this.pizza = pizza;
     }
 
-    public int getPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(int payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 

@@ -9,6 +9,8 @@ public class Pizza {
     private String type;
     private String[] price = new String[3];
     private String offer;
+    private int pid;
+    private boolean F;
 
     public Pizza(String name, String summary, String type, String[] price, String offer) {
         setName(name);
@@ -16,6 +18,23 @@ public class Pizza {
         setType(type);
         setPrice(price);
         setOffer(offer);
+    }
+    public Pizza(){}
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    public boolean isF() {
+        return F;
+    }
+
+    public void setF(boolean f) {
+        F = f;
     }
 
     public String getName() {

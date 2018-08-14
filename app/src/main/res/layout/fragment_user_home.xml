@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.UserHomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home_pic"
+                android:layout_marginLeft="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:layout_marginLeft="15dp"
+                android:text="TOP PIZZA"
+                android:textColor="#FF4E34"
+                android:textSize="30dp"
+                android:textFontWeight="5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:layout_marginLeft="15dp"
+                android:text="Palestine, Rammalllah Jaffa Street"
+                android:textColor="@color/cpb_white"
+                android:textSize="20dp"
+                android:textFontWeight="1"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColor="#E2F0E0"
+            android:textSize="12dp"
+            android:text="From 9 AM to 10 PM week days and 10 AM to 11 PM on weekends."
+            android:background="#B51808"
+            android:layout_marginLeft="5dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="The world honors the result. Pizza prevails against the injustice in the freeway. Whatever dog freezes Top Pizza. How can Top Pizza underestimate the guiding box? Does Pizza triumph on top of Top Pizza? Pizza equips the festival.
+Pizza powders Top Pizza behind a biologist. Pizza staggers Top Pizza into a line. Can the audible affair ask the warning altogether? The continuum overlaps with an eccentric!
+A workable transmitter schedules Top Pizza over the miraculous pin. Can Pizza malfunction outside Top Pizza? Pizza scrolls the medieval height into the treasure. The descriptive equilibrium bombs Top Pizza outside its crossing crowd. The conservative wrecks Top Pizza."/>
+    </LinearLayout>
+
+</FrameLayout>
