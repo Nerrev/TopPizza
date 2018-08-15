@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.CircularProgressButton;
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.activities.LoginActivity;
 import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
@@ -121,6 +122,7 @@ public class ProfileFragment extends Fragment {
                    else {
                        infoConfirm.setProgress(100);
                        Login.user=dbh.getUserByEmail(email.getText().toString());
+                       Login.user.moveToNext();
                        resetScene();
                        activity.recreate();
                    }
@@ -164,6 +166,7 @@ public class ProfileFragment extends Fragment {
                     else {
                         passwordConfirm.setProgress(100);
                         Login.user=dbh.getUserByEmail(email.getText().toString());
+                        Login.user.moveToNext();
                         Toast.makeText(activity, "Password Successfully changed.",
                                 Toast.LENGTH_LONG).show();
                         resetScene();
