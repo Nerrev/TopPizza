@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.activities.AdminActivity;
 import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
@@ -29,6 +30,7 @@ public class OrderFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     final int USER_ORDERS=1;
+    final int FILTER_ORDERS=2;
 
     public OrderFragment() {
     }
@@ -63,12 +65,21 @@ public class OrderFragment extends Fragment {
             mode=getArguments().getInt("mode");
             if( mode == USER_ORDERS)
                 orders= dbh.getUserOrders(Login.user.getInt(Login.user.getColumnIndex("ID")));
+            else if( mode == FILTER_ORDERS)
+                orders = dbh.getOrdersByType(getArguments().getString("Type"));
             else
                 orders= dbh.getAllOrders();
 
+            int income=0;
             while(orders.moveToNext()){
                 Order order=new Order();
                 order.setPayment(orders.getString(orders.getColumnIndex("PAYMENT")));
+
+                String tmp = new String(order.getPayment());
+
+                tmp=tmp.replace("$","");
+                income+=Integer.parseInt(tmp);
+
                 order.setOdate(orders.getString(orders.getColumnIndex("ORDERDATE")));
                 Cursor customer = dbh.getUserName(orders.getInt(orders.getColumnIndex("ID")));
                 customer.moveToNext();
@@ -79,6 +90,9 @@ public class OrderFragment extends Fragment {
                 ordersList.add(order);
             }
 
+            AdminActivity ad=(AdminActivity) getActivity();
+            ad.setIncome(""+income);
+            ad.setOrderCount(""+ordersList.size());
 
 
             recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener,mode));

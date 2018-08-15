@@ -149,12 +149,37 @@ public class SQLhelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+    public Cursor getPizzaByType(String type){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from PIZZA where TYPE='" + type + "'", null);
 
+        return cursor;
+    }
+    public Cursor getPizzaByPrice(int size,String price){
+        SQLiteDatabase db = getReadableDatabase();
+        String p = price+"$";
+        Cursor cursor;
+        if(size == 0)
+            cursor = db.rawQuery("select * from PIZZA where SPRICE LIKE'" + p + "'", null);
+        else if(size == 1)
+             cursor = db.rawQuery("select * from PIZZA where MPRICE LIKE'" + p + "'", null);
+        else
+             cursor = db.rawQuery("select * from PIZZA where LPRICE LIKE'" + p + "'", null);
+
+        return cursor;
+    }
     public Cursor getAllUsers() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from USER", null);
+        return cursor;
+    }
+    public Cursor getTypes(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select TYPE from PIZZA", null);
 
         return cursor;
+
     }
     public void removeOrders(){
 
@@ -234,6 +259,13 @@ public class SQLhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from PIZZA as P , ORDERS as O WHERE P.PID=O.PID and O.ID=" + user, null);
 
+        return cursor;
+
+    }
+
+    public Cursor getOrdersByType(String type) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from ORDERS as O , PIZZA as P WHERE O.PID=P.PID and P.TYPE='" +type+"'", null);
         return cursor;
 
     }

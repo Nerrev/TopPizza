@@ -6,38 +6,38 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_yHome"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_home_black_24dp"
             android:title="Home" />
         <item
             android:id="@+id/nav_Pizza"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/pizza_menu_icon"
             android:title="Pizza Menu" />
         <item
             android:id="@+id/nav_yorders"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/orders_icon"
             android:title="Your Orders" />
         <item
             android:id="@+id/nav_yFavorites"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/fav_menu_icon"
             android:title="Your Favorite" />
 
         <item
             android:id="@+id/nav_yOffers"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/offer_icon"
             android:title="Special Offers" />
         <item
             android:id="@+id/nav_yProfile"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_manage"
             android:title="Profile" />
 
         <item
             android:id="@+id/nav_CallUs"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_share"
             android:title="Call us / Find us" />
 
         <item
             android:id="@+id/nav_yLogout"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_send"
             android:title="Logout" />
     </group>
 

@@ -26,6 +26,8 @@ public class PizzaFragment extends Fragment {
     private int mColumnCount = 1;
     final int FAVORITE_MODE=1;
     final int OFFERS_MODE=2;
+    final int FILTER_TYPE_MODE=3;
+    final int FILTER_PRICE_MODE=4;
     private OnListFragmentInteractionListener mListener;
 
     public PizzaFragment() {
@@ -62,6 +64,10 @@ public class PizzaFragment extends Fragment {
                 pizzas= dbh.getUserFavorites(Login.user.getInt(Login.user.getColumnIndex("ID")));
             else if(mode == OFFERS_MODE)
                 pizzas= dbh.getOffers() ;
+            else if(mode == FILTER_TYPE_MODE)
+                pizzas= dbh.getPizzaByType(getArguments().getString("Type")) ;
+            else if(mode == FILTER_PRICE_MODE)
+                pizzas= dbh.getPizzaByPrice(getArguments().getInt("size"),getArguments().getString("Price")) ;
             else
                 pizzas= dbh.getAllPizza() ;
 
@@ -90,7 +96,7 @@ public class PizzaFragment extends Fragment {
 
 
 
-            recyclerView.setAdapter(new MyPizzaRecyclerViewAdapter(pizzaList, mListener,getActivity()));
+            recyclerView.setAdapter(new MyPizzaRecyclerViewAdapter(pizzaList, mListener,getActivity(),mode));
         }
         return view;
     }

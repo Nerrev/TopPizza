@@ -7,12 +7,12 @@
         android:title="@string/admin_home" />
     <item
         android:id="@+id/navigation_orders"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/orders_icon"
         android:title="Orders" />
     <item
         android:id="@+id/navigation_statistics"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Statistics" />
+        android:icon="@drawable/delete_user_icon"
+        android:title="Delete User" />
     <item
         android:id="@+id/navigation_adverts"
         android:icon="@drawable/ic_dashboard_black_24dp"
@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/navigation_AddAdmin"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/add_admin_icon"
         android:title="@string/admin_addAdmin" />
 
 </menu>

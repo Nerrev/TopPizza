@@ -4,8 +4,11 @@ import android.app.FragmentManager;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +17,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.ContactUsFragment;
@@ -29,6 +36,9 @@ import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserActivity extends AppCompatActivity
@@ -78,11 +88,12 @@ public class UserActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         drawer.closeDrawers();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        final FragmentManager fragmentManager = getFragmentManager();
+                        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.userActivityHolder,new ProfileFragment(),"UPR");
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
+                        hideFilter();
                     }
                 });
             }
@@ -121,23 +132,103 @@ public class UserActivity extends AppCompatActivity
                 fragmentTransaction.replace(R.id.userActivityHolder,of,"UOR");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                hideFilter();
             }
         });
 
 
-
-        //REMOVE
-
-
-
         SQLhelper dbh=new SQLhelper(this);
-        Login.user=dbh.getUserByEmail("mail@gmail.com");
-        Login.user.moveToNext();
+
+        final Spinner mTypes = (Spinner) findViewById(R.id.Mtypes);
+        List<String> options = new ArrayList<>();
+        options.add("Type");
+        Cursor c = dbh.getTypes();
+
+        while(c.moveToNext()) {
+            if(!options.contains(c.getString(c.getColumnIndex("TYPE"))))
+            options.add(c.getString(c.getColumnIndex("TYPE")));
+        }
 
 
-        //REMOVE
+        ArrayAdapter objGenderArr = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, options);
+        mTypes.setAdapter(objGenderArr);
 
 
+
+        final  Spinner mSizes = (Spinner) findViewById(R.id.Msizes);
+        String[] soptions = {"Small", "Medium", "Large"};
+        ArrayAdapter sobjGenderArr = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, soptions);
+        mSizes.setAdapter(sobjGenderArr);
+
+        final EditText mPrice = (EditText) findViewById(R.id.Mprice);
+
+
+        hideFilter();
+
+
+
+
+        mTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(!mTypes.getSelectedItem().toString().equals("Type")) {
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Bundle bundl = new Bundle();
+                    bundl.putInt("mode", 3);
+                    bundl.putString("Type", mTypes.getSelectedItem().toString());
+                    PizzaFragment of = new PizzaFragment();
+                    of.setArguments(bundl);
+                    fragmentTransaction.replace(R.id.userActivityHolder, of, "UPM");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+                else{
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Bundle bundl = new Bundle();
+                    bundl.putInt("mode", 0);
+                    bundl.putString("Type", mTypes.getSelectedItem().toString());
+                    PizzaFragment of = new PizzaFragment();
+                    of.setArguments(bundl);
+                    fragmentTransaction.replace(R.id.userActivityHolder, of, "UPM");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ImageView priceSearch = findViewById(R.id.sizeSearch);
+
+
+        priceSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String price =mPrice.getText().toString();
+                if(!price.equals("")){
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Bundle bundl = new Bundle();
+                    bundl.putInt("mode", 4);
+                    bundl.putInt("size", mSizes.getSelectedItemPosition());
+                    bundl.putString("Price", mPrice.getText().toString());
+                    PizzaFragment of = new PizzaFragment();
+                    of.setArguments(bundl);
+                    fragmentTransaction.replace(R.id.userActivityHolder, of, "UPM");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+
+            }
+        });
 
 
     }
@@ -161,10 +252,12 @@ public class UserActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (id == R.id.nav_yHome) {
+            hideFilter();
             fragmentTransaction.replace(R.id.userActivityHolder,new UserHomeFragment(),"HM");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }else if (id == R.id.nav_Pizza) {
+            showFilter();
             Bundle bundl = new Bundle();
             bundl.putInt("mode",0);
             PizzaFragment of=new PizzaFragment();
@@ -174,6 +267,7 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yFavorites) {
+            hideFilter();
             Bundle bundl = new Bundle();
             bundl.putInt("mode", 1);
            PizzaFragment of=new PizzaFragment();
@@ -183,6 +277,7 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yOffers) {
+            hideFilter();
             Bundle bundl = new Bundle();
             bundl.putInt("mode", 2);
             PizzaFragment of=new PizzaFragment();
@@ -192,6 +287,7 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yorders) {
+            hideFilter();
             Bundle bundl = new Bundle();
             bundl.putInt("mode", 1);
             OrderFragment of=new OrderFragment();
@@ -200,17 +296,20 @@ public class UserActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_CallUs) {
+            hideFilter();
             fragmentTransaction.replace(R.id.userActivityHolder,new ContactUsFragment(),"UOR");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_yLogout) {
+            hideFilter();
             Login.Logout();
             Intent i = new Intent(UserActivity.this, LoginActivity.class);
             UserActivity.this.startActivity(i);
             finish();
 
         }else if (id == R.id.nav_yProfile) {
+            hideFilter();
             fragmentTransaction.replace(R.id.userActivityHolder,new ProfileFragment(),"UPR");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
@@ -229,4 +328,16 @@ public class UserActivity extends AppCompatActivity
     }
     public void onListFragmentInteraction(Order order){
     }
+
+    public void hideFilter(){
+        LinearLayout lyt = findViewById(R.id.filterLyt);
+        lyt.setVisibility(View.GONE);
+    }
+
+
+    public void showFilter(){
+       LinearLayout lyt = findViewById(R.id.filterLyt);
+       lyt.setVisibility(View.VISIBLE);
+    }
+
 }

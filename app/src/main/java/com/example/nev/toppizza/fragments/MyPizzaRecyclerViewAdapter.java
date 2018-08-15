@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.activities.UserActivity;
 import com.example.nev.toppizza.fragments.PizzaFragment.OnListFragmentInteractionListener;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.services.Login;
@@ -23,10 +24,12 @@ public class MyPizzaRecyclerViewAdapter extends RecyclerView.Adapter<MyPizzaRecy
     private final List<Pizza> mValues;
     private final OnListFragmentInteractionListener mListener;
     Activity activity;
-    public MyPizzaRecyclerViewAdapter(List<Pizza> items, OnListFragmentInteractionListener listener, Activity activity1) {
+    int mode=0;
+    public MyPizzaRecyclerViewAdapter(List<Pizza> items, OnListFragmentInteractionListener listener, Activity activity1, int mode) {
         mValues = items;
         mListener = listener;
         activity=activity1;
+        this.mode=mode;
     }
 
     @Override
@@ -73,6 +76,8 @@ public class MyPizzaRecyclerViewAdapter extends RecyclerView.Adapter<MyPizzaRecy
                     holder.mFavorite.setImageResource(R.drawable.greenhearts0);
                     dbh.deleteFavorite(FID);
                     mValues.get(index).setF(false);
+                    if(mode == 1)
+                    holder.mView.setVisibility(View.GONE);
                 }
 
                     else{

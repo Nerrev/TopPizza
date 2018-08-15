@@ -18,6 +18,7 @@ public class MyOrderRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderRecy
     private final List<Order> mValues;
     private final OnListFragmentInteractionListener mListener;
     final int USER_ORDERS=1;
+    final int FILTER_ORDERS=2;
     int mode=0;
     public MyOrderRecyclerViewAdapter(List<Order> items, OnListFragmentInteractionListener listener,int mode) {
         mValues = items;

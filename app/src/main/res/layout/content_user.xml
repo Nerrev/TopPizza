@@ -15,7 +15,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        android:id="@+id/filterLyt">
 
         <Spinner
             android:layout_marginTop="10dp"
@@ -25,27 +28,35 @@
             android:background="@drawable/edit_text_style"
             android:spinnerMode="dropdown"
             android:layout_marginLeft="10dp"
-            android:visibility="gone"/>
+
+            />
 
 
         <Spinner
             android:layout_marginTop="10dp"
             android:id="@+id/Msizes"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:background="@drawable/edit_text_style"
             android:spinnerMode="dropdown"
             android:layout_marginLeft="35dp"
-            android:visibility="gone"/>
+        />
 
 
         <EditText
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
             android:hint="Price"
             android:id="@+id/Mprice"
-            android:visibility="gone"/>
+            android:inputType="numberDecimal"
+            />
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/sizeSearch"
+            android:src="@drawable/search_1"/>
 
 
     </LinearLayout>
