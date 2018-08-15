@@ -103,12 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                         if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("Admin")){
                             Intent i = new Intent(LoginActivity.this, AdminActivity.class); // change activity
                             LoginActivity.this.startActivity(i);
-
+                                finish();
 
                         }
                         else if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("User")) {
                             Intent i = new Intent(LoginActivity.this, UserActivity.class);
                             LoginActivity.this.startActivity(i);
+                            finish();
                         }
                     }
                 }

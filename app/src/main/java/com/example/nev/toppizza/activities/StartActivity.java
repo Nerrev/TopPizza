@@ -11,6 +11,7 @@ import com.dd.CircularProgressButton;
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.controllers.ConnectionAsyncTask;
 import com.example.nev.toppizza.models.Pizza;
+import com.example.nev.toppizza.models.User;
 import com.example.nev.toppizza.services.SQLhelper;
 
 import java.util.List;
@@ -24,7 +25,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start);
-
 
         button = (CircularProgressButton) findViewById(R.id.startBtn);
         button.setIndeterminateProgressMode(true);

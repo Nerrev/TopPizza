@@ -90,10 +90,11 @@ public class OrderFragment extends Fragment {
                 ordersList.add(order);
             }
 
-            AdminActivity ad=(AdminActivity) getActivity();
-            ad.setIncome(""+income);
-            ad.setOrderCount(""+ordersList.size());
-
+            if(mode != USER_ORDERS) {
+                AdminActivity ad = (AdminActivity) getActivity();
+                ad.setIncome("" + income);
+                ad.setOrderCount("" + ordersList.size());
+            }
 
             recyclerView.setAdapter(new MyOrderRecyclerViewAdapter(ordersList, mListener,mode));
         }

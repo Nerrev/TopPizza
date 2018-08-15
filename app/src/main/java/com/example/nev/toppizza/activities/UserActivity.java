@@ -45,6 +45,7 @@ public class UserActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PizzaFragment.OnListFragmentInteractionListener
 ,OrderFragment.OnListFragmentInteractionListener{
 
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +73,10 @@ public class UserActivity extends AppCompatActivity
 
 
                 byte[] profilePicture=null;
-                int index=-1;
-                index=Login.user.getColumnIndex("IMAGE");
-                if(index!=-1) {
-                    profilePicture = Login.user.getBlob(index);
+                int index2=-1;
+                index2=Login.user.getColumnIndex("IMAGE");
+                if(index2!=-1) {
+                    profilePicture = Login.user.getBlob(index2);
                     if (profilePicture != null && profilePicture.length > 0)
                         profilePic.setImageBitmap(Functions.getImage(profilePicture));
                 }

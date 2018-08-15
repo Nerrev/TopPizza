@@ -38,7 +38,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 try {
 
                     EditText firstName = (EditText) findViewById(R.id.firstName);

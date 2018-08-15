@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,7 +201,7 @@ public class ProfileFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                 }
                 else {
-                    final ImageButton profilePic = activity.findViewById(R.id.profilePic);
+                    final ImageView profilePic = activity.findViewById(R.id.profilePic);
                     final TextView email = (TextView) activity.findViewById(R.id.profileEmail);
                     profilePic.setImageBitmap(bitmap);
                     SQLhelper dbh = new SQLhelper(activity);
@@ -209,8 +210,9 @@ public class ProfileFragment extends Fragment {
                                 Toast.LENGTH_LONG).show();
                     } else {
                         Login.user = dbh.getUserByEmail(email.getText().toString());
+                        Login.user.moveToNext();
                         resetScene();
-                        activity.recreate();
+                        profilePic.setImageBitmap(bitmap);
                         Toast.makeText(activity, "Profile picture changed Successfully.",
                                 Toast.LENGTH_LONG).show();
                     }

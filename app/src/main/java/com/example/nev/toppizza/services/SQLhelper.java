@@ -87,7 +87,7 @@ public class SQLhelper extends SQLiteOpenHelper {
             contentValues.put("LNAME",lastName);
         if(phone!=null)
             contentValues.put("PHONE",phone);
-        if(profilePic!=null)
+        if( profilePic!=null)
             contentValues.put("IMAGE",profilePic);
         if(passwrod!=null)
             contentValues.put("PASSWORD",passwrod);
