@@ -13,10 +13,6 @@
         android:id="@+id/navigation_statistics"
         android:icon="@drawable/delete_user_icon"
         android:title="Delete User" />
-    <item
-        android:id="@+id/navigation_adverts"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Insert Advert" />
 
     <item
         android:id="@+id/navigation_AddAdmin"

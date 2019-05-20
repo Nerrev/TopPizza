@@ -20,15 +20,11 @@ import android.widget.TextView;
 
 import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.fragments.AddAdmin;
-import com.example.nev.toppizza.fragments.AddAdvertFragment;
 import com.example.nev.toppizza.fragments.DelUserFragment;
 import com.example.nev.toppizza.fragments.OrderFragment;
-import com.example.nev.toppizza.fragments.PizzaFragment;
 import com.example.nev.toppizza.fragments.ProfileFragment;
 import com.example.nev.toppizza.models.Order;
 import com.example.nev.toppizza.services.SQLhelper;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,6 @@ public class AdminActivity extends AppCompatActivity  implements OrderFragment.O
     private LinearLayout adminLayout;
     private DelUserFragment delUserFragment;
     private AddAdmin addAdmin;
-    private AddAdvertFragment addAdvertFragment;
     private ProfileFragment profileFragment;
     private OrderFragment orderFragment;
 
@@ -79,12 +74,6 @@ public class AdminActivity extends AppCompatActivity  implements OrderFragment.O
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();
                     return true;
-                case R.id.navigation_adverts:
-                    hideFilter();
-                    fragmentTransaction.replace(R.id.adminLyt,addAdvertFragment,"AD");
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commitAllowingStateLoss();
-                    return true;
             }
             return false;
         }
@@ -102,7 +91,6 @@ public class AdminActivity extends AppCompatActivity  implements OrderFragment.O
         hideFilter();
         delUserFragment= new DelUserFragment();
         addAdmin=new AddAdmin();
-        addAdvertFragment= new AddAdvertFragment();
         profileFragment= new ProfileFragment();
         orderFragment=new OrderFragment();
 

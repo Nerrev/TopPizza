@@ -12,6 +12,7 @@ import com.example.nev.toppizza.R;
 import com.example.nev.toppizza.controllers.ConnectionAsyncTask;
 import com.example.nev.toppizza.models.Pizza;
 import com.example.nev.toppizza.models.User;
+import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.SQLhelper;
 
 import java.util.List;

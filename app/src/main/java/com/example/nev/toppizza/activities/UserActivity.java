@@ -130,6 +130,7 @@ public class UserActivity extends AppCompatActivity
                 bundl.putInt("mode", 1);
                 OrderFragment of=new OrderFragment();
                 of.setArguments(bundl);
+
                 fragmentTransaction.replace(R.id.userActivityHolder,of,"UOR");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

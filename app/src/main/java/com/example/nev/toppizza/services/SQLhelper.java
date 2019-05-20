@@ -27,8 +27,7 @@ public class SQLhelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE PIZZA(PID INTEGER  PRIMARY KEY AUTOINCREMENT,NAME TEXT,SUMMARY TEXT,TYPE TEXT,SPRICE TEXT,MPRICE TEXT,LPRICE TEXT,OFFER TEXT)");
         db.execSQL("CREATE TABLE FAVORITES(FID INTEGER  PRIMARY KEY AUTOINCREMENT,ID INTEGER,PID INTEGER,FOREIGN KEY(ID) REFERENCES USER(ID),FOREIGN KEY(PID) REFERENCES PIZZA(PID))");
         db.execSQL("CREATE TABLE ORDERS(OID INTEGER  PRIMARY KEY AUTOINCREMENT,ID INTEGER,PID INTEGER, PAYMENT TEXT,ORDERDATE TEXT,FOREIGN KEY(ID) REFERENCES USER(ID),FOREIGN KEY(PID) REFERENCES PIZZA(PID))");
-        db.execSQL("CREATE TABLE Advert(AID INTEGER  PRIMARY KEY AUTOINCREMENT, AD BLOB,START_DATE TEXT,END_DATE TEXT )");
-    }
+         }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -48,23 +47,6 @@ public class SQLhelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             db.insertOrThrow("USER", null, contentValues);
-            return true;
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-
-            return false;
-        }
-    }
-    public boolean insertAdvert(Date start, Date end, byte[] img){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("START_DATE", start.toString());
-        contentValues.put("END_DATE", end.toString());
-        contentValues.put("AD", img);
-
-
-        try {
-            SQLiteDatabase db = getWritableDatabase();
-            db.insertOrThrow("ADVERT", null, contentValues);
             return true;
         } catch (SQLiteException e) {
             e.printStackTrace();

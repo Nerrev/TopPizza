@@ -58,7 +58,6 @@ public class OrderFragment extends Fragment {
 
             List<Order> ordersList=new ArrayList<Order>();
 
-
             SQLhelper dbh = new SQLhelper(getActivity());
             Cursor orders;
             int mode=0;

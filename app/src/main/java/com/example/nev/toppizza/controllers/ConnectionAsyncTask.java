@@ -52,7 +52,7 @@ public class ConnectionAsyncTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        if (connected || s != null) {
+        if (connected && s != null) {
             ((StartActivity) activity).setButtonProg(100);
             List<Pizza> pizza = PizzaJasonParser.getObjectFromJason(s);
             ((StartActivity) activity).loadPizza(pizza);

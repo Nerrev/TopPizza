@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.nev.toppizza.R;
+import com.example.nev.toppizza.models.User;
 import com.example.nev.toppizza.services.Functions;
 import com.example.nev.toppizza.services.Login;
 import com.example.nev.toppizza.services.SQLhelper;
@@ -26,7 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button sign = (Button) findViewById(R.id.signUp);
-
+        SQLhelper dbh = new SQLhelper(LoginActivity.this);
+        User ad = new User("admin1@gmail.com", Functions.encrypt("admin1234"),"admin","admin","admin","admin");
+        ad.setType("Admin");
+        boolean meh = dbh.insertUser(ad);
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                 EditText email = (EditText) findViewById(R.id.loginEmail);
                 EditText pass = (EditText) findViewById(R.id.loginPass);
 
-
                 String emailt = email.getText().toString();
                 String passt = pass.getText().toString();
                 SQLhelper dbHelper = new SQLhelper(LoginActivity.this);
@@ -70,8 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 } else {
 
-
-
                     if (!cursor.moveToFirst()) {
                         Toast.makeText(getApplicationContext(), "Wrong email or password",
                                 Toast.LENGTH_LONG).show();
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                     } else {
-                        Login.user=cursor;
+                        Login.user = cursor;
                         Toast.makeText(getApplicationContext(), "Welcome",
                                 Toast.LENGTH_LONG).show();
 
@@ -100,13 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                             ed.commit();
                         }
 
-                        if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("Admin")){
+                        if (cursor.getString(cursor.getColumnIndex("TYPE")).equals("Admin")) {
                             Intent i = new Intent(LoginActivity.this, AdminActivity.class); // change activity
                             LoginActivity.this.startActivity(i);
-                                finish();
+                            finish();
 
-                        }
-                        else if(cursor.getString(cursor.getColumnIndex("TYPE")).equals("User")) {
+                        } else if (cursor.getString(cursor.getColumnIndex("TYPE")).equals("User")) {
                             Intent i = new Intent(LoginActivity.this, UserActivity.class);
                             LoginActivity.this.startActivity(i);
                             finish();
